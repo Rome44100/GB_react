@@ -1,0 +1,12 @@
+.msgList {
+    padding: 12px 10px;
+    border-bottom: dashed 1px #000;
+    width: 30vw;
+    display: flex;
+    gap: 20px;
+    background-color: #cccccc44;
+}
+
+.msgList:nth-child(2n) {
+    background-color: #ccccccff;
+}
