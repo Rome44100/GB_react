@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #000;
+}
+
+.App-header h3 {
+  text-decoration: underline;
+  color: #61dafb;
+  cursor: pointer;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+main {
+  text-align: left;
+  padding: 0 40px;
+}
+
+/** LIST **/
+
+.msgList {
+  padding: 12px 10px;
+  border-bottom: dashed 1px #000;
+  width: 30vw;
+  display: flex;
+  gap: 20px;
+  background-color: #cccccc44;
+}
+
+.msgList:nth-child(2n) {
+  background-color: #ccccccff;
+}
+
+/**** FORM ****/
+
+.addMsgForm {
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  padding: 10px;
+  gap: 20px;
+}
+
+.addMsgForm label {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.addMsgForm input, .addMsgForm textarea {
+  width: 100%;
+}
+
+.addMsgForm input[type="submit"] {
+  width: 50%;
+}
