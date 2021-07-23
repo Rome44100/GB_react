@@ -8,58 +8,63 @@ import Message from './components/message/message.js'
 
 // import AddMsgForm from "./components/addMsgForm/addMsgForm.js"
 
+const AUTHORS = {
+  ME: "Me",
+  BOT: "Robot"
+}
+
 function App() {
   const [ messageList, setMessageList ] = React.useState([
     // { id: 1001, author: "Amy", message: "Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone!" },
     // { id: 1002, author: "Tom", message: "Hello, Amy!" },
-    // { id: 1003, author: "Go", message: "Hello, Amy and Tom!" }
+    // { id: 1003, author: "Molly", message: "Hello, Amy and Tom!" }
   ]);
 
-  const fillList = () => {
-    setMessageList((prevMessageList) => prevMessageList.concat([
-      { id: 1001, author: "Amy", message: "Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone!" },
-      { id: 1002, author: "Tom", message: "Hello, Amy!" },
-      { id: 1003, author: "Go", message: "Hello, Amy and Tom!" }
-    ]));
-  };
+  // const [ nameVal, setNameVal ] = React.useState("");
+
+  const [ msgVal, setMsgVal ] = React.useState("");
+
+  const getCnt = (list = []) => {
+    if (list.length === 0) return 1;
+    let idArr = [];
+    for (let i = 0; i < list.length; i++) {
+      idArr.push(list[i].id);
+    }
+    return Math.max.apply(null, idArr) + 1;
+  }
+
+  // const handlerNameVal = (e) => {
+  //   setNameVal(e.target.value);
+  // }
+
+  const handlerMsgVal = (e) => {
+    setMsgVal(e.target.value);
+  }
 
   React.useEffect(() => {
-    // messageList.concat([
-    //   { id: 1001, author: "Amy", message: "Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone!" },
-    //   { id: 1002, author: "Tom", message: "Hello, Amy!" },
-    //   { id: 1003, author: "Go", message: "Hello, Amy and Tom!" }
-    // ]);
-    // fillList();
-    console.log(messageList);
+    if( messageList.length && 
+        messageList[messageList.length - 1].author !== AUTHORS.BOT) {
+      setTimeout(() => {
+        setMessageList((currMessageList) => [
+          ...currMessageList,
+          { id: getCnt(currMessageList), author: AUTHORS.BOT, message: "You should leave this chat!" }
+        ])
+      }, 1500)
+    }
   }, [ messageList ]);
 
-  // setMessageList((messageList) => {
-  //   messageList.concat(
-  //     { id: 1001, author: "Amy", message: "Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone!" },
-  //     { id: 1002, author: "Tom", message: "Hello, Amy!" },
-  //     { id: 1003, author: "Go", message: "Hello, Amy and Tom!" }
-  //   );
-  // });
-
   const submitHandler = (e) => {
-    // setMessageList((messageList) => {
-    //   console.log(messageList);
-    // });
-    console.log(e.target.elements[0]);
-    // very bad code
-    let name = e.target.elements[0].value;
-    let msg = e.target.elements[1].value;
+    e.preventDefault();
 
-    messageList.push( { id: 333, author: name, message: msg } );
-    console.log(messageList);
+    setMessageList(currMessageList => ([
+      ...currMessageList, 
+      { id: getCnt(currMessageList), author: AUTHORS.ME, message: msgVal }
+    ]));
+    
+    // console.log(messageList);
 
-    // React.setState(prevState => prevState.messageList);
-    alert(messageList);
+    setMsgVal("");
   };
-
-  // React.useMemo(() => {}, [ messageList, setMessageList ]);
-
-  // React.useEffect(() => {}, [ submitHandler ]);
 
   return (
     <div className="App">
@@ -76,11 +81,11 @@ function App() {
         <form onSubmit={ submitHandler } className="addMsgForm">
             <label>
                 Имя:
-                <input required type="text" />
+                <input value={ AUTHORS.ME } disabled type="text" readOnly />
             </label>
             <label>
                 Сообщение:
-                <textarea required />
+                <textarea value={ msgVal } required onChange={ handlerMsgVal } />
             </label>
             <input type="submit" value="Отправить" />
         </form>
