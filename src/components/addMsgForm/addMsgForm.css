@@ -4,18 +4,18 @@
     width: 30vw;
     padding: 10px;
     gap: 20px;
-}
-
-.addMsgForm label {
+  }
+  
+  .addMsgForm label {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-}
-
-.addMsgForm input, .addMsgForm textarea {
+  }
+  
+  .addMsgForm input, .addMsgForm textarea {
     width: 100%;
-}
-
-.addMsgForm input[type="submit"] {
+  }
+  
+  .addMsgForm input[type="submit"] {
     width: 50%;
-}
+  }
