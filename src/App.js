@@ -4,9 +4,14 @@ import React from 'react';
 // import ChatList from './components/chatList/chatList';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Chat from './components/chat/chat'
+import Chat from './components/chat/chat';
+import { useParams, useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 
 function App() {
+  const { chatId } = useParams();
+  const match = useRouteMatch("/chats/:chatId");
+
   const [ chatList, setChatList ] = React.useState([
       { id: 1001, name: "GroupChat", desc: "Hello, everyone!" },
       { id: 1002, name: "Tom", desc: "Hello, Amy!" },
@@ -32,7 +37,7 @@ function App() {
                             key={ chat.id } 
                             selected={ chat.id === curChat.id } 
                             onClick={ () => { handleChangeChat(chat) } }>
-                              { chat.name }
+                              <Link to={`/chats/${ chat.id}`}>{ chat.name }</Link>
                   </ListItem>
                 )
             }) }
