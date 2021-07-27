@@ -19,7 +19,15 @@ function App() {
       { id: 1004, name: "Федя", desc: "Федя, лучший друг!" }
   ]);
 
-  const [ curChat, setCurChat ] = React.useState(chatList[0]);
+  const wrongChat = (match) => {
+    const findId = null !== match ? match.params.chatId : 0;
+    let arr = [];
+    for(let i = 0; i < chatList.length; i++) arr.push(chatList[i].id);
+    return !arr.includes(findId) ? "Нет такого чата!" : "";
+  }
+
+  // const [ curChat, setCurChat ] = React.useState(chatList[0]);
+  const [ curChat, setCurChat ] = React.useState(null !== match ? match.params.chatId : chatList[0]);
 
   const handleChangeChat = chat => setCurChat(chat);
 
@@ -30,6 +38,7 @@ function App() {
       </header>
       <main>
         <div>
+          {/* { () => { wrongChat(match) } } */}
           <List subheader="Мои чаты:">
             { chatList.map(chat => {
                 return (

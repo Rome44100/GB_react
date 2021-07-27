@@ -22,14 +22,17 @@ export default function Router() {
                 </ul>
             </header>
             <Switch>
-                <Route path="/" exact component={ App } />
-                <Route path="/chats" exact render={ params => {
+                <Route path="/" exact>
+                    <p>Home page</p>
+                </Route>
+                {/* <Route path="/chats" render={ params => {
                     console.log( { params } );
                     return <p>Chats page</p>
-                }} />
-                <Route path="/chats/:chatId" render={ ({ match }) => {
+                }} /> */}
+                {/* <Route path="/chats/:chatId" component={ App } render={ ({ match }) => {
                     return <p>Certain chat page, { match.params?.chatId }</p>
-                }} />
+                }} /> */}
+                <Route path="/chats" component={ App } />
                 <Route path="/profile">
                     <p>Profile</p>
                 </Route>
