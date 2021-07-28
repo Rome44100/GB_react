@@ -33,6 +33,7 @@ export default function Router() {
                     return <p>Certain chat page, { match.params?.chatId }</p>
                 }} /> */}
                 <Route path="/chats" component={ App } />
+                <Route path="/chats/:chatId" component={ App } />
                 <Route path="/profile">
                     <p>Profile</p>
                 </Route>

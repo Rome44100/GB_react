@@ -14,14 +14,13 @@ export default function AddMsgForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // console.log(e.target.children)
+
         if (submitHandler) {
             const msgField = document.querySelector("#outlined-multiline-static");
 
-            if(msgField.value !== "") {
+            if(msgVal !== "") {
                 submitHandler(msgVal);
-            } else {
-                msgField.error = true;
-                msgField.helperText = "Значение не должно быть пустым!";
             }
 
             msgField.focus();
