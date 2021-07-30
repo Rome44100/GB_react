@@ -4,6 +4,7 @@ import React from "react";
 import { Switch, Route } from "react-router";
 import { Link } from "react-router-dom";
 import App from "../../App";
+import Profile from "../../components/profile/index"
 
 export default function Router() {
     return (
@@ -34,9 +35,7 @@ export default function Router() {
                 }} /> */}
                 <Route path="/chats" component={ App } />
                 <Route path="/chats/:chatId" component={ App } />
-                <Route path="/profile">
-                    <p>Profile</p>
-                </Route>
+                <Route path="/profile" component={ Profile }/>
                 <Route>
                     <h1>404: page not found!</h1>
                 </Route>
