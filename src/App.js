@@ -1,0 +1,63 @@
+import './App.css';
+
+import React from 'react';
+// import ChatList from './components/chatList/chatList';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Chat from './components/chat/chat';
+import { useParams, useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
+
+function App() {
+  const { chatId } = useParams();
+  const match = useRouteMatch("/chats/:chatId");
+
+  const [ chatList, setChatList ] = React.useState([
+      { id: 1001, name: "GroupChat", desc: "Hello, everyone!" },
+      { id: 1002, name: "Tom", desc: "Hello, Amy!" },
+      { id: 1003, name: "Molly", desc: "Hello, Amy and Tom!" },
+      { id: 1004, name: "Федя", desc: "Федя, лучший друг!" }
+  ]);
+
+  const wrongChat = (match) => {
+    const findId = null !== match ? match.params.chatId : 0;
+    let arr = [];
+    for(let i = 0; i < chatList.length; i++) arr.push(chatList[i].id);
+    return !arr.includes(findId) ? "Нет такого чата!" : "";
+  }
+
+  // const [ curChat, setCurChat ] = React.useState(chatList[0]);
+  const [ curChat, setCurChat ] = React.useState(null !== match ? match.params.chatId : chatList[0]);
+
+  const handleChangeChat = chat => setCurChat(chat);
+
+  return (
+    <div className="App">
+      <header>
+        <h1>Chat me everythere!</h1>
+      </header>
+      <main>
+        <div>
+          {/* { () => { wrongChat(match) } } */}
+          <List subheader="Мои чаты:">
+            { chatList.map(chat => {
+                return (
+                  <ListItem button 
+                            key={ chat.id } 
+                            selected={ chat.id === curChat.id } 
+                            onClick={ () => { handleChangeChat(chat) } }>
+                              <Link to={`/chats/${ chat.id}`}>{ chat.name }</Link>
+                  </ListItem>
+                )
+            }) }
+          </List>
+        </div>
+        <div>
+          <Chat id={ curChat.id } />
+        </div>
+      </main>
+    </div>
+  );
+}
+
+export default App;
