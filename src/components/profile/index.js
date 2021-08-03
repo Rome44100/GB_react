@@ -1,20 +1,20 @@
-import React, { useCallback } from "react";
-
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { store } from "../../store/index"
-import { changeIsOnline, changeName } from "../../store/actions/profile";
+import { changeIsOnline } from "../../store/actions/profile";
+
+// import { store } from "../../store/index";
 
 export default function Profile() {
-    // const { showName, name } = store.getState().profile;
-    // const dispatch = store.dispatch;
 
     const dispatch = useDispatch();
     const { age, name, isOnline } = useSelector( state => state.profile )
 
     const handleIsOnline = (e) => {
         dispatch(changeIsOnline(e.target.checked))
-    }    
+    }
+
+    // store.subscribe(() => console.info(store.getState()))
 
     return <div>
             <h3>Profile</h3>
@@ -27,7 +27,6 @@ export default function Profile() {
             <input 
                 type="checkbox"
                 checked={ isOnline }
-                // value={ isOnline }
                 onChange={ handleIsOnline }
                 />
             <span>Set Online</span>
