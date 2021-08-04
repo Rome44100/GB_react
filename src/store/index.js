@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from "redux";
-import chatsReducer from "./reducers/chats.js";
 import profileReducer from "./reducers/profile.js";
+import chatsReducer from "./reducers/chats.js";
 import messagesReducer from "./reducers/messages.js";
 
 const rootReducer = combineReducers({

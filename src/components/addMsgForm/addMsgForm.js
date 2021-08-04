@@ -2,6 +2,7 @@ import './addMsgForm.css';
 
 import React, { useRef } from 'react';
 import { Button, TextField } from "@material-ui/core";
+import AUTHORS from '../../constants';
 
 export default function AddMsgForm(props) {
     const { submitHandler, authors } = props
@@ -15,16 +16,10 @@ export default function AddMsgForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // console.log(e.target.children)
-
         if (submitHandler) {
-            // const msgField = document.querySelector("#outlined-multiline-static");
-
             if(msgVal !== "") {
                 submitHandler(msgVal);
             }
-
-            // msgField.focus();
             textAreaEl.current.focus();
             setMsgVal("");
         }
