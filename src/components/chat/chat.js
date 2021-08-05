@@ -6,7 +6,7 @@ import Message from '../../components/message/message.js';
 import AddMsgForm from "../../components/addMsgForm/addMsgForm.js";
 import AUTHORS from "../../constants";
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage } from '../../store/actions/messages';
+import { addMessage, sendMessageToBot } from '../../store/actions/messages';
 
 export default function Chat() {
     // const [ messageList, setMessageList ] = React.useState([
@@ -61,17 +61,19 @@ export default function Chat() {
     // }, [ messageList ]);
 
     const submitHandler = (msg) => {
-        // setMessageList(currMessageList => ([
-        //     ...currMessageList, 
-        //     { id: getCnt(currMessageList), author: AUTHORS.ME, message: msg }
-        // ]));
-        dispatch(
-          addMessage(chatId, {
-              id: `${getCnt(messageList)}`,
-              author: AUTHORS.ME,
-              text: msg,
-          })
-        )
+        // dispatch(
+        //   addMessage(chatId, {
+        //       id: `${getCnt(messageList)}`,
+        //       author: AUTHORS.ME,
+        //       text: msg,
+        //   })
+        // )
+
+        dispatch(sendMessageToBot(chatId, {
+          id: `${getCnt(messageList)}`,
+          author: AUTHORS.ME,
+          text: msg,
+        }));
     };
 
     return (
