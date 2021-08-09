@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import App from "../../App";
 import Profile from "../../components/profile/index";
 import Chat from "../../components/chat/chat";
+import Spacenews from "../spaceNews/spacenews";
 
 export default function Router() {
     return (
@@ -20,6 +21,9 @@ export default function Router() {
                     </li>
                     <li>
                         <Link to="/profile">Profile</Link>
+                    </li>
+                    <li>
+                        <Link to="/spacenews">Space News!</Link>
                     </li>
                 </ul>
             </header>
@@ -36,7 +40,8 @@ export default function Router() {
                 }} /> */}
                 <Route path="/chats" component={ App } />
                 <Route path="/chats/:chatId" component={ Chat } />
-                <Route path="/profile" component={ Profile }/>
+                <Route path="/profile" component={ Profile } />
+                <Route path="/spacenews" component={ Spacenews } />
                 <Route>
                     <h1>404: page not found!</h1>
                 </Route>

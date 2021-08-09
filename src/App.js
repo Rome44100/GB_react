@@ -14,13 +14,6 @@ function App() {
   const { chatId } = useParams();
   const match = useRouteMatch("/chats/:chatId");
 
-  // const [ chatList, setChatList ] = React.useState([
-  //     { id: 1001, name: "GroupChat", desc: "Hello, everyone!" },
-  //     { id: 1002, name: "Tom", desc: "Hello, Amy!" },
-  //     { id: 1003, name: "Molly", desc: "Hello, Amy and Tom!" },
-  //     { id: 1004, name: "Федя", desc: "Федя, лучший друг!" }
-  // ]);
-
   const chatList = useSelector(state => state.chats);
   const dispatch = useDispatch();
 

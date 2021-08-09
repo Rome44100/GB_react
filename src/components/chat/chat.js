@@ -9,15 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMessage, sendMessageToBot } from '../../store/actions/messages';
 
 export default function Chat() {
-    // const [ messageList, setMessageList ] = React.useState([
-    //     // { id: 1001, author: "Amy", message: "Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone! Hello, everyone!" },
-    //     // { id: 1002, author: "Tom", message: "Hello, Amy!" },
-    //     // { id: 1003, author: "Molly", message: "Hello, Amy and Tom!" }
-    // ]);
-
-    // const chatId = props.id;
-    // const { chatId } = useParams();
-
     const match = useRouteMatch("/chats/:chatId");
     const chatId = match.params.chatId;
 
@@ -32,43 +23,8 @@ export default function Chat() {
         }
         return Math.max.apply(null, idArr) + 1;
     }
-    
-    // React.useEffect(() => {
-    //     if( messageList.length && 
-    //         messageList[messageList.length - 1].author !== AUTHORS.BOT) {
-    //       setTimeout(() => {
-    //         setMessageList((currMessageList) => [
-    //           ...currMessageList,
-    //           { id: getCnt(currMessageList), author: AUTHORS.BOT, message: "You should leave this chat!" }
-    //         ])
-    //       }, 1500)
-    //     }
-    // }, [ messageList ]);
-
-    // React.useEffect(() => {
-    //     if( messageList.length && 
-    //         messageList[messageList.length - 1].author !== AUTHORS.BOT) {
-    //       setTimeout(() => {
-    //         dispatch(
-    //           addMessage(chatId, {
-    //               id: getCnt(Object.values(messageList)),
-    //               author: AUTHORS.BOT,
-    //               text: "You should leave this chat!",
-    //           })
-    //         )
-    //       }, 1500)
-    //     }
-    // }, [ messageList ]);
 
     const submitHandler = (msg) => {
-        // dispatch(
-        //   addMessage(chatId, {
-        //       id: `${getCnt(messageList)}`,
-        //       author: AUTHORS.ME,
-        //       text: msg,
-        //   })
-        // )
-
         dispatch(sendMessageToBot(chatId, {
           id: `${getCnt(messageList)}`,
           author: AUTHORS.ME,
