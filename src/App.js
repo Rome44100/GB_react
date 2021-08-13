@@ -4,27 +4,29 @@ import React from 'react';
 import { List, ListItem, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete'
 import Chat from './components/chat/chat';
-import { useParams, useRouteMatch } from "react-router";
+import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import Input from "./components/input/input";
 import { addChat, removeChat } from './store/actions/chats';
+import firebase from 'firebase';
+import { changeIsAuth } from './store/actions/profile';
 
 function App() {
-  const { chatId } = useParams();
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log("onAuthStateChange", { user });
+      
+      dispatch( changeIsAuth( Boolean( user ) ) );
+    })
+  })
+
   const match = useRouteMatch("/chats/:chatId");
 
   const chatList = useSelector(state => state.chats);
-  const dispatch = useDispatch();
 
-  const wrongChat = (match) => {
-    const findId = null !== match ? match.params.chatId : 0;
-    let arr = [];
-    for(let i = 0; i < chatList.length; i++) arr.push(chatList[i].id);
-    return !arr.includes(findId) ? "Нет такого чата!" : "";
-  }
-
-  // const [ curChat, setCurChat ] = React.useState(null !== match ? match.params.chatId : Object.values(chatList)[0]);
   const [ curChat, setCurChat ] = React.useState(null !== match ? match.params.chatId : "");
 
   let chat;
@@ -44,7 +46,7 @@ function App() {
   }
 
   const onAddChat = (name) => {
-    dispatch(addChat(`${getCnt(Object.values(chatList))}`, name))
+    dispatch( addChat(`${ getCnt( Object.values( chatList ) ) }`, name) )
   }
 
   const onRemoveChat = (chatId) => {
@@ -58,7 +60,6 @@ function App() {
       </header>
       <main>
         <div>
-          {/* { () => { wrongChat(match) } } */}
           <List subheader="Мои чаты:">
             { Object.values(chatList).map(chat => {
                 return (

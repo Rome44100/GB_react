@@ -1,19 +1,30 @@
 import './chat.css';
 
 import React from 'react';
-import { useParams, useRouteMatch } from 'react-router'
+import { useRouteMatch } from 'react-router'
 import Message from '../../components/message/message.js';
 import AddMsgForm from "../../components/addMsgForm/addMsgForm.js";
 import AUTHORS from "../../constants";
 import { useDispatch, useSelector } from 'react-redux';
-import { addMessage, sendMessageToBot } from '../../store/actions/messages';
+import { sendMessageToBot } from '../../store/actions/messages';
+import firebase from 'firebase';
+import { changeIsAuth } from "../../store/actions/profile";
 
 export default function Chat() {
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+      firebase.auth().onAuthStateChanged((user) => {
+        console.log("onAuthStateChange", { user });
+        
+        dispatch( changeIsAuth( Boolean( user ) ) );
+      })
+    })
+
     const match = useRouteMatch("/chats/:chatId");
     const chatId = match.params.chatId;
 
     const messageList = useSelector((state) => state.messages[chatId] || [])
-    const dispatch = useDispatch()
     
     const getCnt = (list = []) => {
         if (list.length === 0) return 1;

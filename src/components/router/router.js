@@ -1,12 +1,21 @@
 import "../../App.css";
 
 import React from "react";
-import { Switch, Route } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import { Link } from "react-router-dom";
 import App from "../../App";
 import Profile from "../../components/profile/index";
 import Chat from "../../components/chat/chat";
 import Spacenews from "../spaceNews/spacenews";
+import Login from "../login/login";
+import { useSelector } from "react-redux";
+
+const PrivateRoute = ( props ) => {
+    const isAuthed = useSelector((state) => state.profile.isAuth);
+    console.log("isAuthed", isAuthed);
+
+    return isAuthed ? <Route { ...props } /> : <Redirect to="/login" />
+}
 
 export default function Router() {
     return (
@@ -31,17 +40,13 @@ export default function Router() {
                 <Route path="/" exact>
                     <p>Home page</p>
                 </Route>
-                {/* <Route path="/chats" render={ params => {
-                    console.log( { params } );
-                    return <p>Chats page</p>
-                }} /> */}
-                {/* <Route path="/chats/:chatId" component={ App } render={ ({ match }) => {
-                    return <p>Certain chat page, { match.params?.chatId }</p>
-                }} /> */}
-                <Route path="/chats" component={ App } />
-                <Route path="/chats/:chatId" component={ Chat } />
-                <Route path="/profile" component={ Profile } />
+                <PrivateRoute path="/chats" component={ App } />
+                <PrivateRoute path="/chats/:chatId" component={ Chat } />
+                <PrivateRoute path="/profile" component={ Profile } />
                 <Route path="/spacenews" component={ Spacenews } />
+
+                <Route path="/login" component={ Login } />
+
                 <Route>
                     <h1>404: page not found!</h1>
                 </Route>

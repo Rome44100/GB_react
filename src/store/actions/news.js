@@ -32,30 +32,8 @@ export const fetchNews = () => {
                     dispatch(setIdleStatus());
                 },
                 (er) => {
-                    // setIsLoaded(false);
                     dispatch(setErrorStatus());
                 }
             );
     }
 }
-
-// const loadData = () => {
-//     setIsLoaded(true);
-//     fetch(API_URL_SPACEX)
-//         .then(response => {
-//             if (!response.ok || response.status !== 200) {
-//                 throw Error("Something went wrong!");
-//             }
-//             return response.json();
-//         })
-//         .then(
-//             (resJson) => {
-//                 setIsLoaded(false);
-//                 setNewsList(resJson);
-//             },
-//             (er) => {
-//                 setIsLoaded(false);
-//                 setError(true);
-//             }
-//         );
-// }

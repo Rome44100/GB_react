@@ -2,7 +2,6 @@ import './addMsgForm.css';
 
 import React, { useRef } from 'react';
 import { Button, TextField } from "@material-ui/core";
-import AUTHORS from '../../constants';
 
 export default function AddMsgForm(props) {
     const { submitHandler, authors } = props

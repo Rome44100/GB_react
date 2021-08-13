@@ -5,7 +5,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Router from "./components/router/router";
 import { Provider } from "react-redux";
-import { store } from "./store/index.js"
+import { store } from "./store/index.js";
+import "./services/firebase";
 
 ReactDOM.render(
   <React.StrictMode>
