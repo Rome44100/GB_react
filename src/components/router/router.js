@@ -8,7 +8,9 @@ import Profile from "../../components/profile/index";
 import Chat from "../../components/chat/chat";
 import Spacenews from "../spaceNews/spacenews";
 import Login from "../login/login";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
+import firebase from "firebase";
+import { changeIsAuth } from '../../store/actions/profile';
 
 const PrivateRoute = ( props ) => {
     const isAuthed = useSelector((state) => state.profile.isAuth);
@@ -18,6 +20,15 @@ const PrivateRoute = ( props ) => {
 }
 
 export default function Router() {
+
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        firebase.auth().onAuthStateChanged((user) => {
+            dispatch( changeIsAuth( Boolean( user ) ) );
+        })
+    })
+
     return (
         <div>
             <header>

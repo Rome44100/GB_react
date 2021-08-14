@@ -7,19 +7,9 @@ import AddMsgForm from "../../components/addMsgForm/addMsgForm.js";
 import AUTHORS from "../../constants";
 import { useDispatch, useSelector } from 'react-redux';
 import { sendMessageToBot } from '../../store/actions/messages';
-import firebase from 'firebase';
-import { changeIsAuth } from "../../store/actions/profile";
 
 export default function Chat() {
     const dispatch = useDispatch();
-
-    React.useEffect(() => {
-      firebase.auth().onAuthStateChanged((user) => {
-        console.log("onAuthStateChange", { user });
-        
-        dispatch( changeIsAuth( Boolean( user ) ) );
-      })
-    })
 
     const match = useRouteMatch("/chats/:chatId");
     const chatId = match.params.chatId;

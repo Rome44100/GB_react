@@ -17,8 +17,6 @@ function App() {
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log("onAuthStateChange", { user });
-      
       dispatch( changeIsAuth( Boolean( user ) ) );
     })
   })

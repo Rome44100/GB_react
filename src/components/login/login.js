@@ -16,7 +16,6 @@ export default function Login() {
     }
 
     const handleLogin = async () => {
-        console.log("email ", email, " pwd ", pwd);
         try {
             await firebase.auth().signInWithEmailAndPassword(email, pwd);
         } catch (er) {
@@ -50,10 +49,23 @@ export default function Login() {
 
     return <>
         <p>Login:</p>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-            <TextField variant="outlined" placeholder="Email" value={ email } type="email" onChange={ handleChangeEmail } ></TextField>
+        <div style={{ display: "flex", 
+                      flexDirection: "column", 
+                      alignItems: "center", 
+                      gap: "10px" }}>
+            <TextField 
+                variant="outlined" 
+                placeholder="Email" 
+                value={ email } 
+                type="email" 
+                onChange={ handleChangeEmail } ></TextField>
             <br />
-            <TextField variant="outlined" placeholder="Password" value={ pwd } type="text" onChange={ handleChangePwd } ></TextField>
+            <TextField 
+                variant="outlined" 
+                placeholder="Password" 
+                value={ pwd } 
+                type="text" 
+                onChange={ handleChangePwd } ></TextField>
             <br />
             <FormControlLabel 
                 control={
@@ -67,9 +79,13 @@ export default function Login() {
                 label={ <p>Еще нет кабинета?</p> }
             />
             <br />
-            <Button variant="outlined" onClick={ handleSubmit }>{ isSigningUp ? "Register" : "Enter" }</Button>
+            <div style={{ color: "red" }}>{ error }</div>
             <br />
-            <div>{ error }</div>
+            <Button 
+                variant="outlined" 
+                onClick={ handleSubmit }>
+                    { isSigningUp ? "Register" : "Enter" }
+            </Button>
         </div>
     </>
 }
