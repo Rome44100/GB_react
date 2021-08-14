@@ -12,7 +12,7 @@ export default function Spacenews() {
 
     React.useEffect(() => {
         dispatch(fetchNews());
-    });
+    }, [ dispatch ]);
 
     const loadData = () => dispatch(fetchNews());
 

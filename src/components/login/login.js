@@ -32,8 +32,6 @@ export default function Login() {
     }
 
     const handleSubmit = () => {
-        console.log("Click on button email and password! ", { email, pwd });
-
         if (!email || !pwd) {
             setError('Введите значения полей!');
             return;
@@ -48,11 +46,11 @@ export default function Login() {
     }
 
     return <>
-        <p>Login:</p>
         <div style={{ display: "flex", 
                       flexDirection: "column", 
                       alignItems: "center", 
                       gap: "10px" }}>
+            <div>Login:</div>
             <TextField 
                 variant="outlined" 
                 placeholder="Email" 

@@ -18,6 +18,17 @@ const PrivateRoute = ( props ) => {
     return isAuthed ? <Route { ...props } /> : <Redirect to="/login" />
 }
 
+// news page error:
+// Warning: Maximum update depth exceeded. 
+// This can happen when a component calls setState inside useEffect, 
+// but useEffect either doesn't have a dependency array, 
+// or one of the dependencies changes on every render.
+// DONE by adding dispatch to the dependencies!
+
+// messages page error:
+// encountered two times a non unique key 'NaN'???
+// DONE by adding a Date.now suffix to message ID
+
 export default function Router() {
 
     const dispatch = useDispatch();
@@ -27,6 +38,12 @@ export default function Router() {
             dispatch( changeIsAuth( Boolean( user ) ) );
         })
     })
+
+    const handleSignOut = (ev) => {
+        ev.preventDefault();
+
+        firebase.auth().signOut();
+    }
 
     return (
         <div>
@@ -43,6 +60,12 @@ export default function Router() {
                     </li>
                     <li>
                         <Link to="/spacenews">Space News!</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                    <li>
+                        <a href="/login" onClick={ handleSignOut }>LogOUT</a>
                     </li>
                 </ul>
             </header>
