@@ -1,0 +1,21 @@
+.addMsgForm {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    padding: 10px;
+    gap: 20px;
+  }
+  
+  .addMsgForm label {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .addMsgForm input, .addMsgForm textarea {
+    width: 100%;
+  }
+  
+  .addMsgForm input[type="submit"] {
+    width: 50%;
+  }
