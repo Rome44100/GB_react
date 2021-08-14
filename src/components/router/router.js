@@ -14,7 +14,6 @@ import { changeIsAuth } from '../../store/actions/profile';
 
 const PrivateRoute = ( props ) => {
     const isAuthed = useSelector((state) => state.profile.isAuth);
-    console.log("isAuthed", isAuthed);
 
     return isAuthed ? <Route { ...props } /> : <Redirect to="/login" />
 }

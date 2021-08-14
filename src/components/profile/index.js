@@ -1,18 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeIsOnline } from "../../store/actions/profile";
-import firebase from 'firebase';
-import { changeIsAuth } from "../../store/actions/profile";
 
 export default function Profile() {
 
     const dispatch = useDispatch();
-
-    React.useEffect(() => {
-        firebase.auth().onAuthStateChanged((user) => {
-            dispatch( changeIsAuth( Boolean( user ) ) );
-        })
-    })
 
     const { age, name, isOnline } = useSelector( state => state.profile )
 

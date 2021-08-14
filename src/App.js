@@ -9,17 +9,17 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import Input from "./components/input/input";
 import { addChat, removeChat } from './store/actions/chats';
-import firebase from 'firebase';
-import { changeIsAuth } from './store/actions/profile';
+// import firebase from 'firebase';
+// import { changeIsAuth } from './store/actions/profile';
 
 function App() {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      dispatch( changeIsAuth( Boolean( user ) ) );
-    })
-  })
+  // React.useEffect(() => {
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     dispatch( changeIsAuth( Boolean( user ) ) );
+  //   })
+  // })
 
   const match = useRouteMatch("/chats/:chatId");
 
